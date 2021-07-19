@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery - Youtube API</title>
+    <link rel="stylesheet" href="./dados/videos.css">
+    <link rel="stylesheet" href="./dados/videos-footer.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+    <header><span id="icon-youtube" class="material-icons">
+            smart_display
+        </span>Youtube API</header>
+
+    <div id="center">
+        <div id="tabs">
+            <ul>
+                <li><a id="documentary" href="#tabs-0">DOCUMENTARIO</a></li>
+                <li><a id="music" href="#tabs-1">MÚSICA</a></li>
+                <li><a id="journalism" href="#tabs-2">JORNALISMO</a></li>
+                <li><a id="course" href="#tabs-3">CURSO</a></li>
+                <li><a id="cartoon" href="#tabs-4">DESENHO</a></li>
+            </ul>
+            <div id="tabs-0">
+                <h2 id="documentary-title"></h2>
+                <div id="documentary-ytplayer" class="default-css"></div>
+                <div id="documentary-accordion" class="accordion">
+                    <h3>Autor</h3>
+                    <div>
+                        <p id="documentary-autor"></p>
+                    </div>
+                    <h3>Tempo de duração</h3>
+                    <div>
+                        <p id="documentary-duration"></p>
+                    </div>
+                    <h3>Lista de Reprodução</h3>
+                    <div>
+                        <div id="documentary-playlist">
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="tabs-1">
+                <h2 id="music-title"></h2>
+                <div id="music-ytplayer" class="default-css"></div>
+                <div id="music-accordion" class="accordion">
+                    <h3>Autor</h3>
+                    <div>
+                        <p id="music-autor"></p>
+                    </div>
+                    <h3>Tempo de duração</h3>
+                    <div>
+                        <p id="music-duration"></p>
+                    </div>
+                    <h3>Lista de Reprodução</h3>
+                    <div>
+                        <div id="music-playlist">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <h2 id="journalism-title"></h2>
+                <div id="journalism-ytplayer" class="default-css"></div>
+                <div id="journalism-accordion" class="accordion">
+                    <h3>Autor</h3>
+                    <div>
+                        <p id="journalism-autor"></p>
+                    </div>
+                    <h3>Tempo de duração</h3>
+                    <div>
+                        <p id="journalism-duration"></p>
+                    </div>
+                    <h3>Lista de Reprodução</h3>
+                    <div>
+                        <div id="journalism-playlist">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-3">
+                <h2 id="course-title"></h2>
+                <div id="course-ytplayer" class="default-css"></div>
+                <div id="course-accordion" class="accordion">
+                    <h3>Autor</h3>
+                    <div>
+                        <p id="course-autor"></p>
+                    </div>
+                    <h3>Tempo de duração</h3>
+                    <div>
+                        <p id="course-duration"></p>
+                    </div>
+                    <h3>Lista de Reprodução</h3>
+                    <div id="course-playlist">
+
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-4">
+                <h2 id="cartoon-title"></h2>
+                <div id="cartoon-ytplayer" class="default-css"></div>
+                <div id="cartoon-accordion" class="accordion">
+                    <h3>Autor</h3>
+                    <div>
+                        <p id="cartoon-autor"></p>
+                    </div>
+                    <h3>Tempo de duração</h3>
+                    <div>
+                        <p id="cartoon-duration"></p>
+                    </div>
+                    <h3>Lista de Reprodução</h3>
+                    <div id="cartoon-playlist">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="div-playlist" hidden>PEDRO</div>
+    </div>
+
+    <!--
+    <footer>
+        <div id="rodape"></div>
+        <div>
+            Documentario
+            <span>Minimizar</span>
+            <span>Maximizar</span>
+            <span>Fechar</span>
+        </div>
+        <div>
+            Documentario
+            <span>Minimizar</span>
+            <span>Maximizar</span>
+            <span>Fechar</span>
+        </div>
+        <div></div>
+        <div></div>
+
+    </footer>
+-->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
+    <script src="./dados/videos.js"></script>
+
+</body>
+
+</html>
