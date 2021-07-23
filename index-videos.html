@@ -7,11 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JQuery - Youtube API</title>
     <link rel="stylesheet" href="./dados/videos.css">
-    <link rel="stylesheet" href="./dados/videos-footer.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-</head>
+                                          
 
 <body>
     <header><span id="icon-youtube" class="material-icons">
@@ -19,7 +17,9 @@
         </span>Youtube API</header>
 
     <div id="center">
+
         <div id="tabs">
+
             <ul>
                 <li><a id="documentary" href="#tabs-0">DOCUMENTARIO</a></li>
                 <li><a id="music" href="#tabs-1">MÚSICA</a></li>
@@ -27,9 +27,10 @@
                 <li><a id="course" href="#tabs-3">CURSO</a></li>
                 <li><a id="cartoon" href="#tabs-4">DESENHO</a></li>
             </ul>
+
             <div id="tabs-0">
                 <h2 id="documentary-title"></h2>
-                <div id="documentary-ytplayer" class="default-css"></div>
+                <div id="documentary-ytplayer"></div>
                 <div id="documentary-accordion" class="accordion">
                     <h3>Autor</h3>
                     <div>
@@ -41,7 +42,7 @@
                     </div>
                     <h3>Lista de Reprodução</h3>
                     <div>
-                        <div id="documentary-playlist">
+                        <div id="documentary-playlist" class="playlist">
 
                         </div>
                     </div>
@@ -51,7 +52,7 @@
             </div>
             <div id="tabs-1">
                 <h2 id="music-title"></h2>
-                <div id="music-ytplayer" class="default-css"></div>
+                <div id="music-ytplayer"></div>
                 <div id="music-accordion" class="accordion">
                     <h3>Autor</h3>
                     <div>
@@ -63,7 +64,7 @@
                     </div>
                     <h3>Lista de Reprodução</h3>
                     <div>
-                        <div id="music-playlist">
+                        <div id="music-playlist" class="playlist">
 
                         </div>
                     </div>
@@ -71,7 +72,7 @@
             </div>
             <div id="tabs-2">
                 <h2 id="journalism-title"></h2>
-                <div id="journalism-ytplayer" class="default-css"></div>
+                <div id="journalism-ytplayer"></div>
                 <div id="journalism-accordion" class="accordion">
                     <h3>Autor</h3>
                     <div>
@@ -83,14 +84,14 @@
                     </div>
                     <h3>Lista de Reprodução</h3>
                     <div>
-                        <div id="journalism-playlist">
+                        <div id="journalism-playlist" class="playlist">
                         </div>
                     </div>
                 </div>
             </div>
             <div id="tabs-3">
                 <h2 id="course-title"></h2>
-                <div id="course-ytplayer" class="default-css"></div>
+                <div id="course-ytplayer"></div>
                 <div id="course-accordion" class="accordion">
                     <h3>Autor</h3>
                     <div>
@@ -101,14 +102,14 @@
                         <p id="course-duration"></p>
                     </div>
                     <h3>Lista de Reprodução</h3>
-                    <div id="course-playlist">
+                    <div id="course-playlist" class="playlist">
 
                     </div>
                 </div>
             </div>
             <div id="tabs-4">
                 <h2 id="cartoon-title"></h2>
-                <div id="cartoon-ytplayer" class="default-css"></div>
+                <div id="cartoon-ytplayer"></div>
                 <div id="cartoon-accordion" class="accordion">
                     <h3>Autor</h3>
                     <div>
@@ -119,19 +120,24 @@
                         <p id="cartoon-duration"></p>
                     </div>
                     <h3>Lista de Reprodução</h3>
-                    <div id="cartoon-playlist">
+                    <div id="cartoon-playlist" class="playlist">
 
                     </div>
 
                 </div>
             </div>
+
         </div>
-        <div id="div-playlist" hidden>PEDRO</div>
+
+
+
     </div>
+    <div id="videohidden" hidden></div>
 
     <!--
     <footer>
-        <div id="rodape"></div>
+        <div id="rodape">Status Youtube API</div>
+
         <div>
             Documentario
             <span>Minimizar</span>
