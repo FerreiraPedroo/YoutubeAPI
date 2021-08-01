@@ -7,7 +7,7 @@ const videoInfo = {
     "music": {
         "videoPlayerId": 1,
         "videoYoutubeId": ["BgkmvPa2V4o"],
-        "videoYoutubePlayListId": ["kVtCFecXldM", "8mUvndag4hw", "MbLirwiFe9I", "DWyUjMJDvl4"]
+        "videoYoutubePlayListId": ["4ISWJRvDIOI", "Mt4yJFDT15I", "ciq4X10CHDI", "qK66-DGx3NA"]
     },
     "journalism": {
         "videoPlayerId": 2,
@@ -35,61 +35,59 @@ function onYouTubeIframeAPIReady() {
 /*
     Função que cria e carrega o player.
 */
-async function createVideoPlayer(_tabName) {
-    let youtubeIdVideo = videoInfo[_tabName].videoYoutubeId;
-    playerPositionList[videoInfo[_tabName].videoPlayerId] = new YT.Player(_tabName + "-ytplayer", {
+async function createVideoPlayer(_tabId) {
+    let youtubeIdVideo = videoInfo[_tabId].videoYoutubeId;
+
+    playerPositionList[videoInfo[_tabId].videoPlayerId] = new YT.Player(_tabId + "-ytplayer", {
         videoId: youtubeIdVideo,
+        enablejsapi: 1,
         events: {
             'onReady': (event) => {
-                let time = event.target.getDuration()
-                $(`#${_tabName}-duration`).html(timeCalculation(time))
-                $(`#${_tabName}-title`).html(event.target.getVideoData().title);
-                updateAccordion(_tabName);
-                loadPlayList(_tabName);
+                let time = event.target.getDuration();
+                $(`#${_tabId}-duration`).html(timeCalculation(time));
+                $(`#${_tabId}-title`).html(event.target.getVideoData().title);
+                updateAccordion(_tabId);
+                loadPlayList(_tabId);
             }
         }
     });
+
 }
 
-/*
-
-
-
-VERIFICAR PORQUE A ABA MUSICA O TEXTO NÃO ESTÁ FUNCIONANDO
-
-
-
-
-
-*/
-async function loadPlayList(_tabName) {
-    let youtubeVideoList = videoInfo[_tabName].videoYoutubePlayListId;
+async function loadPlayList(_tabId) {
+    let youtubeVideoList = videoInfo[_tabId].videoYoutubePlayListId;
     let player = [];
-    let playerVideo_div;
-    let playerVideo_img;
-    await $(".videohidden").remove()
+    let playerVideoDiv;
+    let playerVideoImg;
+
+    await $(".videohidden").remove();
+
     for (let forListPos = 0; forListPos < youtubeVideoList.length; forListPos++) {
 
-        playerVideo_div = $("<div>").attr({ id: _tabName + "-playlist-video-" + forListPos });
-        playerVideo_img = $("<img>").attr({
+        playerVideoDiv = $("<div>").attr({
+            id: _tabId + "-playlist-video-" + forListPos,
+            class: "playlist-img-text"
+        });
+        playerVideoImg = $("<img>").attr({
             videoid: youtubeVideoList[forListPos],
             class: "playlist-video-img",
             src: `https://img.youtube.com/vi/${youtubeVideoList[forListPos]}/mqdefault.jpg`
         });
 
-        playerVideo_div.append(playerVideo_img);
-        $("#" + _tabName + "-playlist").append(playerVideo_div);
-        $("#" + _tabName + "-playlist").append($("<div>").attr({ id: `videohidden-${forListPos}`, class: "videohidden", hidden: true }));
+        playerVideoDiv.append(playerVideoImg);
+        $("#" + _tabId + "-playlist").append(playerVideoDiv);
+        $("#" + _tabId + "-playlist").append($("<div>").attr({ id: `videohidden-${forListPos}`, class: "videohidden", hidden: true }));
 
         player[forListPos] = new YT.Player(`videohidden-${forListPos}`, {
             videoId: youtubeVideoList[forListPos],
             events: {
                 'onReady': (event) => {
-                    playerListTitleDuration(_tabName, event, forListPos)
+                    playerListTitleDuration(_tabId, event, forListPos);
                 }
             }
         });
     }
+    playListEventClick()
 }
 
 /*
@@ -97,16 +95,16 @@ async function loadPlayList(_tabName) {
     Chamada dentro da função "loadPlayList"
 */
 function playerListTitleDuration(_id, _info, _loop) {
-    console.log(_id,_info,_loop)
+    console.log(_id, _info, _loop);
     let info = _info;
     let infoTitle = info.target.getVideoData().title;
     let infoDuration = timeCalculation(info.target.getDuration());
     let playerVideo_titleDuration = $("<span></span>").attr({
         class: "playlist-titleDuration",
     });
-    console.log(infoTitle,infoDuration,playerVideo_titleDuration)
-    playerVideo_titleDuration.html(infoTitle + "<br>" + infoDuration)
-    $("#" + _id + "-playlist-video-" + _loop).append(playerVideo_titleDuration)
+    console.log(infoTitle, infoDuration, playerVideo_titleDuration);
+    playerVideo_titleDuration.html("<b>Titulo:</b><span class='infotitle'> " + infoTitle + "</span><br><b>Tempo: </b><span class='infoduration'>" + infoDuration + "</span>");
+    $("#" + _id + "-playlist-video-" + _loop).append(playerVideo_titleDuration);
 }
 /*
     Função para converter um timer que esteja em segundos retornando o formato "hh:mm:ss" ou "mm:ss" ou "ss"
@@ -126,6 +124,24 @@ function timeCalculation(_totalSecond) {
 function updateAccordion(_id) {
     $("#" + _id + "-accordion").css("display", "inline");
 }
+
+/*
+    Carrega o video que foi clicado na playlist.        
+*/
+function playListEventClick() {
+    $(".playlist-video-img").on("click", function () {
+
+        let videoPlaylistSelected = $(this).attr("videoid");
+        playerPositionList[videoInfo[actualTabPlayer].videoPlayerId].loadVideoById({
+            videoId: videoPlaylistSelected,
+            startSeconds: 0.1
+        });
+
+        $("#" + actualTabPlayer + "-title").html($($($(this).parent().children()[1]).children()[1]).text());
+        $("#" + actualTabPlayer + "-duration").html($($($(this).parent().children()[1]).children()[4]).text());
+    })
+}
+
 
 $(document).ready(() => {
     /*
@@ -147,7 +163,7 @@ $(document).ready(() => {
          > Não foi carregado: executa a função "createVideoPlayer"
          > Foi carregado: Não executa nada.
     */
-    $("#tabs > ul > li > a").on('click', function () {
+    $("#tabs > ul > li > a").on("click", function () {
 
         // PAUSA O VIDEO QUE ESTIVER SENDO REPRODUZIDO
         if (actualTabPlayer == undefined) {
@@ -155,22 +171,26 @@ $(document).ready(() => {
             console.table("ChangeActualPlayer: ", actualTabPlayer);
         } else {
             let ytplayerId = videoInfo[actualTabPlayer].videoPlayerId;
-            console.log("----------------------------")
+            console.log("----------------------------");
             console.log(playerPositionList[ytplayerId]);
-            console.log(ytplayerId)
+            console.log(ytplayerId);
             if (playerPositionList[ytplayerId].getPlayerState() == 1) {
-                console.log(playerPositionList[ytplayerId].getPlayerState())
+                console.log(playerPositionList[ytplayerId].getPlayerState());
                 playerPositionList[ytplayerId].pauseVideo();
             }
             actualTabPlayer = this.id;
         }
         // VERIFICA SE A ABA DO VIDEO JÁ FOI CARREGADO
         if (playerPositionList[videoInfo[this.id].videoPlayerId] == undefined) {
-            console.log(playerPositionList[videoInfo[this.id].videoPlayerId])
-            console.log(this.id)
+            console.log(playerPositionList[videoInfo[this.id].videoPlayerId]);
+            console.log(this.id);
             createVideoPlayer(this.id);
         }
     })
+
+
+
+
 })
 
 
