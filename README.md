@@ -1,2 +1,2 @@
 # YoutubeAPI
- Utilizando a API do YouTube.
+Utilização da API do Youtube e JQUERY UI
